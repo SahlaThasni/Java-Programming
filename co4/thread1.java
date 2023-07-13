@@ -1,50 +1,65 @@
+
 import java.util.Scanner;
-class Tables extends Thread
+class Multi extends Thread
 {
-public void run(){
-int num;
-System.out.println("Enter any Number for tables:");
-Scanner in=new Scanner(System.in);
-num=in.nextInt();
-for(int i=1; i<=10; i++){
-int n=num*i;
-
-System.out.println(num+"*"+i+"="+n);
-
-}
-}
+  int a=5,m;
+        public void run()
+        {
+        System.out.println("MULTIPLICATION TABLE");
+        for(int i=1;i<=10;i++)
+        {
+        m=a*i;
+        System.out.println(a+ "*" +i+ "=" +m);
+        }
+        }
 }
 class Prime extends Thread
 {
-public void run(){
-int n, i, count, j;
-    Scanner scan = new Scanner(System.in);
-
-    System.out.println("Enter the value of n to find prime number:");
-    n = scan.nextInt();
-
-    System.out.println("The first " + n + " prime numbers are:");
-
-    for (i = 2; i <= n; i++) {
-      count = 0;
-      for (j = 2; j <= i / 2; j++) {
-        if (i % j == 0) {
-          count++;
-          break;
-        }
-      }
-      if (count == 0 && i != 1) {
-        System.out.print(i + " ");
-      }
-    }
-  }
-}
-class main
+int n;
+Prime(int n)
 {
-public static void main(String args[]) {
-Tables t1=new Tables();
-t1.start();
-Prime p1=new Prime();
-p1.start();
+ this.n=n;
 }
+        public void run()
+        {
+        int i, j,k;
+         System.out.println("Prime numbers between 1 and " + n + " are:");
+
+            for (i = 1; i <= n; i++)
+            {
+
+                if (i == 1 || i == 0)
+                    continue;
+
+                k= 1;
+              for (j = 2; j <= i / 2; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        k = 0;
+                        break;
+                    }
+                }
+
+
+                if (k == 1)
+                    System.out.println(i + " ");
+            }
+        }
+  }
+
+class Main
+{
+        public static void main(String args[])
+        {
+                Scanner sc=new Scanner(System.in);
+                Multi m=new Multi();
+                System.out.println("\n First N prime numbers");
+                System.out.println("Enter the limit:");
+                int n = sc.nextInt();
+                Prime p=new Prime(n);
+                m.start();
+                p.start();
+
+        }
 }
